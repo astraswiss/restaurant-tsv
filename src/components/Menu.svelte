@@ -1,420 +1,247 @@
+<script>
+    let active = 'pizzen';
 
-    <style>
-        .menu-container {
-            display: flex;  
+    const tabs = [
+        { id: 'pizzen',    label: 'Pizzen' },
+        { id: 'pasta',     label: 'Pasta' },
+        { id: 'salate',    label: 'Salate & Vorspeisen' },
+        { id: 'schnitzel', label: 'Schnitzel' },
+        { id: 'dessert',   label: 'Dessert' },
+    ];
 
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 10px 0;
-            gap: 16px;
-            
-        }
-        .menu-section {
-          
-            flex: 1 1 300px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            background-color: #fff;
-            
-        }
-        .menu-section h2 {
+    const pizzen = [
+        { nr: '41', name: 'Margherita',       desc: 'Tomatensoße und Käse',                                      price: '8,50 €' },
+        { nr: '42', name: 'Salame',           desc: 'Salami',                                                    price: '9,50 €' },
+        { nr: '43', name: 'Prosciutto',       desc: 'Schinken',                                                  price: '9,50 €' },
+        { nr: '44', name: 'Christina',        desc: 'Salami, Pilze',                                             price: '10,00 €' },
+        { nr: '45', name: 'Romana',           desc: 'Schinken, Pilze',                                           price: '10,00 €' },
+        { nr: '46', name: 'Hawaii',           desc: 'Schinken und Ananas',                                       price: '10,50 €' },
+        { nr: '47', name: 'Contessa',         desc: 'Salami, Schinken, Pilze',                                   price: '11,20 €' },
+        { nr: '48', name: 'Tonno',            desc: 'Thunfisch und Zwiebeln',                                    price: '11,90 €' },
+        { nr: '49', name: 'Parma Speziale',   desc: 'Parmaschinken, Rucola, Parmesan',                           price: '13,50 €' },
+        { nr: '50', name: 'Frutti di Mare',   desc: 'Meeresfrüchte, Knoblauch',                                  price: '13,50 €' },
+        { nr: '51', name: 'Sophia Loren',     desc: 'Schinken, Salami, Paprika, Ei',                             price: '12,90 €' },
+        { nr: '52', name: 'Quattro Stagioni', desc: 'Schinken, Artischocken, Pilze, Spargel',                    price: '12,90 €' },
+        { nr: '53', name: 'Ricotta Spinaci',  desc: 'Schafskäse, Spinat',                                        price: '11,50 €' },
+        { nr: '54', name: 'Quattro Formaggi', desc: '4 Käsesorten',                                              price: '12,90 €' },
+        { nr: '55', name: 'Vegetale',         desc: 'Frisches Gemüse',                                           price: '12,90 €' },
+        { nr: '56', name: 'Mozzarella',       desc: 'Mozzarella, Tomaten, Basilikum',                            price: '11,50 €' },
+        { nr: '57', name: 'Colosseo',         desc: 'Schinken, Zwiebeln, Pilze, Peperoni',                       price: '12,90 €' },
+        { nr: '58', name: 'Calzone',          desc: 'Teigtasche mit Schinken, Pilze',                            price: '12,50 €' },
+        { nr: '59', name: 'Pizza Stella',     desc: 'Pilze, Schinken, Spargel, Oliven, Kapern, Sardellen',       price: '13,80 €' },
+        { nr: '60', name: 'Spinaci Salmone',  desc: 'Lachs, Spinat, Knoblauch',                                  price: '13,90 €' },
+    ];
 
-            color: #af1e22;
-        }
-        .menu-item {
-            margin: 10px 0;
-        }
-        .menu-title {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            color: #555;
-        }
-        .menu-description {
-            color: #777;
-        }
-        .price {
-            font-weight: bold;
-            color: #333;
-        }
-    </style>
+    const pasta = [
+        { nr: '80', name: 'Spaghetti Napoli',                   desc: 'Mit Tomatensoße',                                                   price: '9,90 €' },
+        { nr: '81', name: 'Spaghetti Bolognese',                desc: 'Mit Hackfleisch-Tomatensoße',                                       price: '11,50 €' },
+        { nr: '82', name: 'Spaghetti Aglio e Olio e Peperoncino', desc: 'Knoblauch, Olivenöl und Parmesanstreifen',                        price: '10,50 €' },
+        { nr: '83', name: 'Spaghetti Carbonara',                desc: 'Mit Schinken-Sahnesoße, Ei',                                        price: '11,50 €' },
+        { nr: '84', name: 'Spaghetti Scampi',                   desc: 'Mit frischen Tomaten, Scampi und Knoblauch',                        price: '14,50 €' },
+        { nr: '85', name: 'Spaghetti Frutti di Mare',           desc: 'Meeresfrüchte und Knoblauch in einer Weißweinsoße',                 price: '14,50 €' },
+        { nr: '86', name: 'Tortellini al Chef',                 desc: 'Pilze, Schinken und Erbsen in Rosésoße',                            price: '12,90 €' },
+        { nr: '87', name: 'Tortellini Panna e Prosciutto',      desc: 'Schinken und Sahne',                                                price: '11,50 €' },
+        { nr: '88', name: 'Tagliatelle Salmone',                desc: 'Mit Lachs und Brokkoli',                                            price: '14,50 €' },
+        { nr: '89', name: 'Penne Porcini',                      desc: 'Steinpilze in Sahnesoße',                                           price: '13,50 €' },
+        { nr: '90', name: 'Tagliatelle della Casa',             desc: 'Steinpilze, Scampi, Rucola, Cherrytomaten und Parmesan',            price: '15,80 €' },
+        { nr: '91', name: 'Tagliatelle al Chef',                desc: 'Pilze, Schinken und Erbsen in Rosésoße',                            price: '12,90 €' },
+        { nr: '92', name: 'Rigatoni Melanzane',                 desc: 'Auberginen und Zucchini in Rosésoße',                               price: '11,50 €' },
+        { nr: '93', name: 'Penne Diavolo',                      desc: 'Mit scharfer Tomatensoße',                                          price: '10,50 €' },
+        { nr: '94', name: 'Gnocchi Speciali',                   desc: 'Mit Paprika, Gorgonzola und Spinat in Rosésoße',                    price: '12,90 €' },
+        { nr: '95', name: 'Lasagne al Forno',                   desc: 'Mit Hackfleisch',                                                   price: '12,90 €' },
+        { nr: '96', name: 'Tortellini al Forno',                desc: 'Mit Erbsen, Schinken überbacken',                                   price: '12,90 €' },
+        { nr: '97', name: 'Rigatoni al Forno',                  desc: 'Mit Erbsen, Schinken und Bolognese-Sahnesoße überbacken',           price: '12,90 €' },
+        { nr: '98', name: 'Combinazione al Forno',              desc: 'Verschiedene Nudeln in Bolognesesoße überbacken',                   price: '12,90 €' },
+    ];
 
-<div class="menu-container">
+    const salate = [
+        { nr: '1',  name: 'Insalata Mista Piccola',        desc: 'Kleiner gemischter Salat',                                                           price: '6,50 €' },
+        { nr: '2',  name: 'Verdura alla Griglia',          desc: 'Gemischtes Gemüse mit frisch gebackenem Brot',                                       price: '11,50 €' },
+        { nr: '3',  name: 'Bruschetta',                    desc: 'Pizzabrot mit Tomaten, Rucola und Parmesan',                                          price: '7,20 €' },
+        { nr: '4',  name: 'Bruschetta della Casa',         desc: 'Geröstetes Brot mit Tomaten, Rucola, Knoblauch, Parmesan und Basilikum',              price: '9,50 €' },
+        { nr: '5',  name: 'Caprese',                       desc: 'Büffelmozzarella mit Tomaten und Basilikum',                                          price: '7,50 €' },
+        { nr: '6',  name: 'Ricotta Calda',                 desc: 'Überbackener Schafskäse',                                                             price: '6,50 €' },
+        { nr: '7',  name: 'Carpaccio Rucola e Parmigiano', desc: 'Mariniertes Rinderfilet mit Rucola, Zitrone und Parmesanstreifen',                    price: '9,50 €' },
+        { nr: '8',  name: 'Crema Pomodoro',                desc: 'Hausgemachte Tomatencremesuppe',                                                      price: '6,50 €' },
+        { nr: '21', name: 'Insalata Mista Grande',         desc: 'Großer gemischter Salat',                                                             price: '8,50 €' },
+        { nr: '22', name: 'Insalata Nizza',                desc: 'Mit Tomaten, Gurken, Rucola, Zwiebeln und Thunfisch',                                  price: '10,50 €' },
+        { nr: '23', name: 'Insalata Tonno',                desc: 'Großer gemischter Salat mit Thunfisch',                                               price: '10,50 €' },
+        { nr: '24', name: 'Insalata Fitness',              desc: 'Mit Garnelen und frischem Brot',                                                      price: '14,20 €' },
+        { nr: '25', name: 'Insalata Capricciosa',          desc: 'Mit Tomaten, Schafskäse, Ei, Schinken und Thunfisch',                                 price: '12,50 €' },
+        { nr: '26', name: 'Insalata della Casa',           desc: 'Mit Tomaten, Gurken, Mais, Paprika, Schafskäse, Oliven, Spargel und Ei',              price: '12,50 €' },
+        { nr: '27', name: 'Insalata Tacchina',             desc: 'Großer gemischter Salat mit Putenbruststreifen',                                      price: '13,80 €' },
+        { nr: '28', name: 'Insalata Salmone',              desc: 'Großer gemischter Salat mit gebratenen Lachsstreifen und gegrilltem Gemüse',          price: '14,20 €' },
+    ];
 
-    <div class="menu-section">
-        <h2>Pizzen O 33cm</h2>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>41. Margherita</span><span class="price">8,50 €</span>
-            </div>
-            <div class="menu-description">Tomatensoße und Käse</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>52. Quattro Stagioni</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Schinken, Artischocken, Pilze, Spargel</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>43. Prosciutto</span><span class="price">9,50 €</span>
-            </div>
-            <div class="menu-description">Schinken</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>54. Quattro Formaggi</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">4 Käsesorten</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>45. Romana</span><span class="price">10,00 €</span>
-            </div>
-            <div class="menu-description">Schinken, Pilze</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>56. Mozzarella</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Mozzarella, Tomaten, Basilikum</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>47. Contessa</span><span class="price">11,20 €</span>
-            </div>
-            <div class="menu-description">Salami, Schinken, Pilze</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>58. Calzone</span><span class="price">12,50 €</span>
-            </div>
-            <div class="menu-description">Teigtasche mit Schinken, Pilze</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>49. Parma Speziale</span><span class="price">13,50 €</span>
-            </div>
-            <div class="menu-description">Parmaschinken, Rucola, Parmesan</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>60. Spinaci Salmone</span><span class="price">13,90 €</span>
-            </div>
-            <div class="menu-description">Lachs, Spinat, Knoblauch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>42. Salame</span><span class="price">9,50 €</span>
-            </div>
-            <div class="menu-description">Salami</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>53. Ricotta Spinaci</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Schafskäse, Spinat</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>44. Christina</span><span class="price">10,00 €</span>
-            </div>
-            <div class="menu-description">Salami, Pilze</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>55. Vegetale</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Frisches Gemüse</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>46. Hawaii</span><span class="price">10,50 €</span>
-            </div>
-            <div class="menu-description">Schinken und Ananas</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>57. Colosseo</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Schinken, Zwiebeln, Pilze, Peperoni</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>48. Tonno</span><span class="price">11,90 €</span>
-            </div>
-            <div class="menu-description">Thunfisch und Zwiebeln</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>59. Pizza Stella</span><span class="price">13,80 €</span>
-            </div>
-            <div class="menu-description">Pilze, Schinken, Spargel, Oliven, Kapern, Sardellen</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>50. Frutti di Mare</span><span class="price">13,50 €</span>
-            </div>
-            <div class="menu-description">Meeresfrüchte, Knoblauch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>51. Sophia Loren</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Schinken, Salami, Paprika, Ei</div>
-        </div>
+    const schnitzel = [
+        { nr: '75', name: 'Jägerschnitzel',      desc: 'Mit Pommes',    price: '12,80 €' },
+        { nr: '76', name: 'Schnitzel Mamma Mia', desc: 'Mit Rigatoni',  price: '13,90 €' },
+    ];
+
+    const dessert = [
+        { nr: '–', name: 'Tiramisù',   desc: 'Hausgemacht, traditioneller Klassiker', price: '6,20 €' },
+        { nr: '–', name: 'Panna Cotta', desc: 'Hausgemacht, Fruchtsoße',              price: '5,50 €' },
+    ];
+
+    const sectionData = { pizzen, pasta, salate, schnitzel, dessert };
+</script>
+
+<div class="menu-wrap">
+    <!-- Tabs -->
+    <div class="tabs" role="tablist">
+        {#each tabs as tab}
+            <button
+                class:active={active === tab.id}
+                on:click={() => active = tab.id}
+                role="tab"
+                aria-selected={active === tab.id}
+            >
+                {tab.label}
+            </button>
+        {/each}
     </div>
 
-    <div class="menu-section">
-        <h2>Pasta</h2>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>80. Spaghetti Napoli</span><span class="price">9,90 €</span>
-            </div>
-            <div class="menu-description">Mit Tomatensoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>90. Tagliatelle della Casa</span><span class="price">15,80 €</span>
-            </div>
-            <div class="menu-description">Steinpilze, Scampi, Rucola, Cherrytomaten und Parmesan</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>91. Tagliatelle al Chef</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Pilze, Schinken und Erbsen in Rosésoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>92. Rigatoni Melanzane</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Auberginen und Zucchini in Rosésoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>93. Penne Diavolo</span><span class="price">10,50 €</span>
-            </div>
-            <div class="menu-description">Mit scharfer Tomatensoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>94. Gnocchi Speciali</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Mit Paprika, Gorgonzola und Spinat in Rosésoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>95. Lasagne al Forno</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Mit Hackfleisch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>96. Tortellini al Forno</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Mit Erbsen, Schinken überbacken</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>97. Rigatoni al Forno</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Mit Erbsen, Schinken und Bolognese-Sahnesoße überbacken</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>98. Combinazione al Forno</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Verschiedene Nudeln in Bolognesesoße überbacken</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>82. Spaghetti Aglio e Olio e Peperoncino</span><span class="price">10,50 €</span>
-            </div>
-            <div class="menu-description">Knoblauch, Olivenöl und Parmesanstreifen</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>84. Spaghetti Scampi</span><span class="price">14,50 €</span>
-            </div>
-            <div class="menu-description">Mit frischen Tomaten, Scampi und Knoblauch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>81. Spaghetti Bolognese</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Mit Hackfleisch-Tomatensoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>83. Spaghetti Carbonara</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Mit Schinken-Sahnesoße, Ei</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>85. Spaghetti Frutti di Mare</span><span class="price">14,50 €</span>
-            </div>
-            <div class="menu-description">Meeresfrüchte und Knoblauch in einer Weißweinsoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>86. Tortellini al Chef</span><span class="price">12,90 €</span>
-            </div>
-            <div class="menu-description">Pilze, Schinken und Erbsen in Rosésoße</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>87. Tortellini Panna e Prosciutto</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Schinken und Sahne</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>88. Tagliatelle Salmone</span><span class="price">14,50 €</span>
-            </div>
-            <div class="menu-description">Mit Lachs und Brokkoli</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>89. Penne Porcini</span><span class="price">13,50 €</span>
-            </div>
-            <div class="menu-description">Steinpilze in Sahnesoße</div>
+    <!-- Panel -->
+    <div class="panel" role="tabpanel">
+        {#if active === 'pizzen'}
+            <p class="panel-note">Ø 33 cm · Alle Pizzen mit Tomatensoße und Käse als Basis</p>
+        {/if}
+        <div class="items-grid">
+            {#each sectionData[active] as item}
+                <div class="item">
+                    <div class="item-top">
+                        <span class="item-name">
+                            {#if item.nr !== '–'}<span class="item-nr">{item.nr}.</span>{/if}
+                            {item.name}
+                        </span>
+                        <span class="item-price">{item.price}</span>
+                    </div>
+                    <p class="item-desc">{item.desc}</p>
+                </div>
+            {/each}
         </div>
     </div>
-
-    <div class="menu-section">
-        <h2>Salate Vorspeise</h2>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>1. Insalata Mista Picola</span><span class="price">6,50 €</span>
-            </div>
-            <div class="menu-description">Kleiner gemischter Salat</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>2. Verdura alla Griglia</span><span class="price">11,50 €</span>
-            </div>
-            <div class="menu-description">Gemischtes Gemüse mit frisch gebackenem Brot</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>3. Bruschetta</span><span class="price">7,20 €</span>
-            </div>
-            <div class="menu-description">Pizzabrot mit Tomaten, Rucola und Parmesan</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>4. Bruschetta della Casa</span><span class="price">9,50 €</span>
-            </div>
-            <div class="menu-description">Geröstetes Brot mit Tomaten, Rucola, Knoblauch, Parmesan und Basilikum</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>5. Caprese</span><span class="price">7,50 €</span>
-            </div>
-            <div class="menu-description">Büffelmozzarella mit Tomaten und Basilikum</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>6. Ricotta Calda</span><span class="price">6,50 €</span>
-            </div>
-            <div class="menu-description">Überbackener Schafskäse</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>7. Carpaccio Rucola e Parmigiano</span><span class="price">9,50 €</span>
-            </div>
-            <div class="menu-description">Mariniertes Rinderfilet mit Rucola, Zitrone und Parmesanstreifen</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>8. Crema Pomodoro</span><span class="price">6,50 €</span>
-            </div>
-            <div class="menu-description">Hausgemachte Tomatencremesuppe</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>21. Insalata Mista Grande</span><span class="price">8,50 €</span>
-            </div>
-            <div class="menu-description">Großer gemischter Salat</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>22. Insalata Nizza</span><span class="price">10,50 €</span>
-            </div>
-            <div class="menu-description">Mit Tomaten, Gurken, Rucola, Zwiebeln und Thunfisch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>23. Insalata Tonno</span><span class="price">10,50 €</span>
-            </div>
-            <div class="menu-description">Großer gemischter Salat mit Thunfisch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>24. Insalata Fitness</span><span class="price">14,20 €</span>
-            </div>
-            <div class="menu-description">Mit Garnelen und frische Brot</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>25. Insalata Capricciosa</span><span class="price">12,50 €</span>
-            </div>
-            <div class="menu-description">Mit Tomaten, Schafskäse, Ei, Schinken und Thunfisch</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>26. Insalata della Casa</span><span class="price">12,50 €</span>
-            </div>
-            <div class="menu-description">Mit Tomaten, Gurken, Mais, Paprika, Schafskäse, Oliven, Spargel und Ei</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>27. Insalate Tacchina</span><span class="price">13,80 €</span>
-            </div>
-            <div class="menu-description">Großer gemischter Salat mit Putenbruststreifen</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>28. Insalata Salmone</span><span class="price">14,20 €</span>
-            </div>
-            <div class="menu-description">Großer gemischter Salat mit gebratenen Lachsstreifen und gegrilltem Gemüse</div>
-        </div>
-    </div>
-
-    <div class="menu-section">
-        <h2>Schnitzel</h2>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>75. Jägerschnitzel</span><span class="price">12,80 €</span>
-            </div>
-            <div class="menu-description">Mit Pommes</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>76. Schnitzel Mamma Mia</span><span class="price">13,90 €</span>
-            </div>
-            <div class="menu-description">Mit Rigatoni</div>
-        </div>
-    </div>
-
-    <div class="menu-section">
-        <h2>Dessert</h2>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>75. Tiramisu</span><span class="price">6,20 €</span>
-            </div>
-            <div class="menu-description">Hausgemacht, traditioneller Klassiker</div>
-        </div>
-        <div class="menu-item">
-            <div class="menu-title">
-                <span>76. Panna Cotta</span><span class="price">5,50 €</span>
-            </div>
-            <div class="menu-description">Hausgemacht, Fruchtsoße</div>
-        </div>
-    </div>
-
 </div>
 
+<style>
+    .menu-wrap {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    /* ─── TABS ─── */
+    .tabs {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 0;
+    }
+
+    .tabs button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--gray);
+        padding: 0.75rem 1.25rem;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        transition: color 150ms ease, border-color 150ms ease;
+        white-space: nowrap;
+    }
+
+    .tabs button:hover {
+        color: var(--dark);
+    }
+
+    .tabs button.active {
+        color: var(--red);
+        border-bottom-color: var(--red);
+        font-weight: 600;
+    }
+
+    /* ─── PANEL ─── */
+    .panel-note {
+        font-size: 0.82rem;
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    }
+
+    .items-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+    }
+
+    /* ─── ITEM ─── */
+    .item {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+        transition: background 150ms ease;
+    }
+
+    .item:hover {
+        background: var(--warm);
+    }
+
+    /* Remove right border for even columns, add separator for odd */
+    .item:nth-child(odd) {
+        border-right: 1px solid var(--border);
+    }
+
+    .item-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .item-name {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--dark);
+        line-height: 1.4;
+    }
+
+    .item-nr {
+        color: var(--gray);
+        font-weight: 400;
+        font-size: 0.82rem;
+        margin-right: 3px;
+    }
+
+    .item-price {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--red);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .item-desc {
+        font-size: 0.8rem;
+        color: var(--gray);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+        .items-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .item:nth-child(odd) {
+            border-right: none;
+        }
+
+        .tabs button {
+            font-size: 0.82rem;
+            padding: 0.6rem 0.9rem;
+        }
+    }
+</style>
