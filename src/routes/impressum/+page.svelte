@@ -15,6 +15,7 @@
             <h2>Angaben gemäß § 5 TMG</h2>
             <p>
                 Ristorante TSV<br>
+                Inhaber: Toni di Sciefchinazo<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt
             </p>
@@ -31,7 +32,7 @@
         <section>
             <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
             <p>
-                <span class="placeholder">[Name des Inhabers]</span><br>
+                Toni di Sciefchinazo<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt
             </p>
