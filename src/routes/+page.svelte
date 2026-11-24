@@ -24,6 +24,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.72 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.29 6.29l1.1-1.06a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
                 +49 9194 8208
             </a>
+            <a href="mailto:info@restaurant-tsv.de" class="mail-link">info@restaurant-tsv.de</a>
         </div>
 
         <div class="hours-card">
@@ -54,6 +55,10 @@
             <div class="hours-row">
                 <span>Sonntag</span>
                 <span>17:00 – 22:00 Uhr</span>
+            </div>
+            <div class="hours-row kitchen">
+                <span>Küche</span>
+                <span>bis 21:00 Uhr</span>
             </div>
         </div>
     </div>
@@ -219,6 +224,27 @@
 
     .hours-row span:last-child {
         color: var(--gray);
+    }
+
+    .hours-row.kitchen {
+        background: var(--cream, #faf7f2);
+    }
+
+    .hours-row.kitchen span:last-child {
+        color: var(--dark);
+        font-weight: 500;
+    }
+
+    .mail-link {
+        display: block;
+        margin-top: 0.9rem;
+        color: var(--gray);
+        font-size: 0.92rem;
+        transition: color 200ms;
+    }
+
+    .mail-link:hover {
+        color: var(--red);
     }
 
     .hours-row.closed span:first-child {

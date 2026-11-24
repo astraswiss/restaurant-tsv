@@ -25,7 +25,7 @@
             <h2>Kontakt</h2>
             <p>
                 Telefon: <a href="tel:+4991948208">+49 9194 8208</a><br>
-                E-Mail: <span class="placeholder">[E-Mail-Adresse einfügen]</span>
+                E-Mail: <a href="mailto:info@restaurant-tsv.de">info@restaurant-tsv.de</a>
             </p>
         </section>
 

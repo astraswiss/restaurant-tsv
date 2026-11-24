@@ -55,7 +55,8 @@
                 Inhaber: Ylli Berisha (Toni)<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt<br>
-                Telefon: <a href="tel:+4991948208">+49 9194 8208</a>
+                Telefon: <a href="tel:+4991948208">+49 9194 8208</a><br>
+                E-Mail: <a href="mailto:info@restaurant-tsv.de">info@restaurant-tsv.de</a>
             </p>
             <p>
                 Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.

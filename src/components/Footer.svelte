@@ -8,12 +8,14 @@
             <h4>Ristorante TSV</h4>
             <p>Sportplatzstraße 4<br>91320 Ebermannstadt</p>
             <a href="tel:+4991948208" class="phone">+49 9194 8208</a>
+            <a href="mailto:info@restaurant-tsv.de" class="phone">info@restaurant-tsv.de</a>
         </div>
 
         <div class="col">
             <h4>Öffnungszeiten</h4>
             <ul>
                 <li><span>Dienstag – Sonntag</span><span>17:00 – 22:00 Uhr</span></li>
+                <li><span>Küche</span><span>bis 21:00 Uhr</span></li>
                 <li class="closed"><span>Montag</span><span>Geschlossen</span></li>
             </ul>
         </div>
@@ -60,12 +62,15 @@
     }
 
     .brand p {
+        color: rgba(255, 255, 255, 0.7);
         font-size: 0.9rem;
         line-height: 1.8;
         margin-bottom: 0.75rem;
     }
 
     .brand .phone {
+        display: block;
+        margin-bottom: 0.35rem;
         color: rgba(255, 255, 255, 0.9);
         font-weight: 500;
         font-size: 0.95rem;
