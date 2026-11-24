@@ -32,7 +32,7 @@
         <section>
             <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
             <p>
-                Toni di Sciefchinazo<br>
+                Ylli Berisha (Toni)<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt
             </p>
