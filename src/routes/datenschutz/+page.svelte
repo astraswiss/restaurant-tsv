@@ -52,7 +52,7 @@
             <p>
                 Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>
                 Ristorante TSV<br>
-                Inhaber: Ylli Berisha<br>
+                Inhaber: Ylli Berisha (Toni)<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt<br>
                 Telefon: <a href="tel:+4991948208">+49 9194 8208</a>

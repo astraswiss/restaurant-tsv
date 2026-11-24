@@ -15,7 +15,7 @@
             <h2>Angaben gemäß § 5 TMG</h2>
             <p>
                 Ristorante TSV<br>
-                Inhaber: Toni di Sciefchinazo<br>
+                Inhaber: Ylli Berisha (Toni)<br>
                 Sportplatzstraße 4<br>
                 91320 Ebermannstadt
             </p>
